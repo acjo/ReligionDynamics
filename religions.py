@@ -55,15 +55,18 @@ def numerical_solve( P0, t_span, M, n, C, I, method='ivp' ):
     return sol
 
 def plot_sol( P0, t_span, M, n, C, I, method='ivp', labels=[] ):
-    sol = numerical_solve(P0, t_span, M, n, C, I, method=method)
+    '''
+    plots the solution
+    '''
+    sol = numerical_solve( P0, t_span, M, n, C, I, method=method )
     fig = plt.figure()
-    fig.set_dpi(300)
-    ax = fig.add_subplot(111)
-    for s, lab in zip(sol.y, labels):
-        ax.plot(sol.t, s, label=lab)
-        ax.legend(loc='best')
+    fig.set_dpi( 300 )
+    ax = fig.add_subplot( 111 )
+    for s, lab in zip( sol.y, labels ):
+        ax.plot( sol.t, s, label=lab )
+        ax.legend( loc='best' )
 
-    ax.set_xlabel('Time')
-    ax.set_ylabel('Population')
-    ax.set_title('SIR Model of religions')
+    ax.set_xlabel( 'Time' )
+    ax.set_ylabel( 'Population' )
+    ax.set_title( 'SIR Model of religions' )
     plt.show()
