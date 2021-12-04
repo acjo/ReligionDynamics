@@ -18,18 +18,16 @@ def define_ivp_system(n, C):
         :param P: population change as a function of time
         :return: (np.ndarray) ode system
         '''
-        size = n.size
-        system = np.array([P[i] * (n[i] + sum([ ( C[i, j] - C[j, i] )*P[j] for j in range(size)])    ) for i in range(size)])
-
-        return system
-
-
-
         # system = np.zeros_like(n)
         # size = system.size
         # for i in range(size):
-        #     system[i] = P[i] * (n[i] + sum([(C[i,j]-C[j,i])*P[j] for j in range(size)]))
+        # system[i] = P[i] * (n[i] + sum([(C[i,j]-C[j,i])*P[j] for j in range(size)]))
         # return system
+        size = n.size
+        return np.array([P[i] * (n[i] + sum([(C[i, j] - C[j, i])*P[j] for j in range(size)])) for i in range(size)])
+
+
+
     return ode
 
 
@@ -50,11 +48,11 @@ def numerical_solve(P0, t_span, M, n, C, method='ivp'):
         t_eval = np.linspace(t_span[0], t_span[-1], M)
         sol =  solve_ivp(ode, t_span, P0, t_eval=t_eval)
     elif method == 'odeint':
-        raise NotImplementedError( 'odeint not yet implemented' )
+        raise NotImplementedError('odeint not yet implemented')
     elif method == 'solve_bvp':
-        raise NotImplementedError( 'solve_bvp not yet implemented' )
+        raise NotImplementedError('solve_bvp not yet implemented')
     else:
-        raise ValueError( 'incorrect method' )
+        raise ValueError('incorrect method')
 
     return sol
 
