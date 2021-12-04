@@ -22,12 +22,12 @@ def define_ivp_system( n, C):
         system = np.zeros( n )
         size = system.size
         for i in range( size ):
-            system[i] = P[ i ]*( n[ i ] + sum( [(C[i,j]-C[j,i])*P[j] for j in range(size)] )
+            system[i] = P[ i ]*( n[ i ] + sum( [(C[i,j]-C[j,i])*P[j] for j in range(size)] ))
 
         return system
     return ode
 
-def numerical_solve( P0, t_span, M, n, C, I, method='ivp' ):
+def numerical_solve( P0, t_span, M, n, C, method='ivp' ):
     '''
     Numerical solves the ivp using solve_ivp
     :parama P0: (n, ) np.ndarray array containing the initial value
@@ -40,7 +40,7 @@ def numerical_solve( P0, t_span, M, n, C, I, method='ivp' ):
     :return: callable the ode system
     '''
     if method == 'ivp':
-        ode = define_ivp_system( n, C, I )
+        ode = define_ivp_system( n, C )
         t_eval = np.linspace( t_span[ 0 ], t_span[ -1 ] )
         sol =  solve_ivp(ode, t_span, P0, t_eval=t_eval)
     elif method == 'odeint':
@@ -52,11 +52,11 @@ def numerical_solve( P0, t_span, M, n, C, I, method='ivp' ):
 
     return sol
 
-def plot_sol( P0, t_span, M, n, C, I, method='ivp', labels=[] ):
+def plot_sol( P0, t_span, M, n, C, method='ivp', labels=[] ):
     '''
     plots the solution
     '''
-    sol = numerical_solve( P0, t_span, M, n, C, I, method=method )
+    sol = numerical_solve( P0, t_span, M, n, C, method=method )
     fig = plt.figure()
     fig.set_dpi( 300 )
     ax = fig.add_subplot( 111 )
