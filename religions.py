@@ -42,13 +42,11 @@ def numerical_solve(t_span, M, n, C, method='ivp', P0 = None, BC = None):
     :param method ="ivp": boolean determing the method
     :return: callable the ode system
     '''
+    ode = define_ode_system(n, C)
+    t_eval = np.linspace(t_span[0], t_span[-1], M)
     if method == 'ivp':
-        ode = define_ode_system(n, C)
-        t_eval = np.linspace(t_span[0], t_span[-1], M)
         sol =  solve_ivp(ode, t_span, P0, t_eval=t_eval)
     elif method == 'bvp':
-        ode = define_ode_system(n, C)
-        t_eval = np.linspace(t_span[0], t_span[-1], M)
         sol = solve_bvp(ode, BC, t_eval, P0 )
     else:
         raise ValueError('incorrect method')
