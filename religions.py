@@ -13,13 +13,13 @@ def define_ivp_system(n, C):
     :return: callable the ode system
     '''
 
-    def ode(t, P):
+    def ode( t, P ):
         '''
         :param t: independent variable
         :param P: population change as a function of time
         :return: (np.ndarray) ode system
         '''
-        system = np.zeros_like(n)
+        system = np.zeros(n)
         size = system.size
         for i in range(size):
             system[i] = P[i] * (n[i] + sum([(C[i,j]-C[j,i])*P[j] for j in range(size)]))
@@ -30,12 +30,12 @@ def define_ivp_system(n, C):
 def numerical_solve(P0, t_span, M, n, C, method='ivp'):
     '''
     Numerical solves the ivp using solve_ivp
-    :parama P0: (n, ) np.ndarray array containing the initial value
+    :parama P0: (n,) np.ndarray array containing the initial value
     :param t_span: (tuple) contains the starting and ending time value
-    :param disc: ( int ) temporal discretization
-    :param n: (n, ) np.ndarray difference between birth rate and death rate of the ith relgion
-    :param C: (n, n) np.ndarray matrix containing conversion rate differences
-    :param I: (n, n) np.ndarray matrix containing interactions between religions
+    :param disc: (int) temporal discretization
+    :param n: (n,) np.ndarray difference between birth rate and death rate of the ith relgion
+    :param C: (n,n) np.ndarray matrix containing conversion rate differences
+    :param I: (n,n) np.ndarray matrix containing interactions between religions
     :param method ="ivp": boolean determing the method
     :return: callable the ode system
     '''
@@ -69,3 +69,17 @@ def plot_sol(P0, t_span, M, n, C, method='ivp', labels=[]):
     ax.set_ylabel('Population')
     ax.set_title('SIR Model of religions')
     plt.show()
+def BryceSection():
+    '''
+    This function solves the system of ODEs using the odeint function
+    :param n: (n, ) np.ndarray difference between birth rate and death rate of the ith relgion
+    :param C: (n,n) np.ndarray matrix containing conversion rate differences
+    :param I: (n,n) np.ndarray matrix containing interactions between religions
+    :param t_span: (tuple) contains the starting and ending time value
+    :param P0: (n,) np.ndarray array containing the initial value
+    :return: callable the ode system
+    '''
+    P0, t_span, M, n, C, method, labels = [], [], [], [], [], [], []
+    ode = define_ivp_system(n,C)
+    sol = odeint(ode, P0, t_span)
+    return sol
