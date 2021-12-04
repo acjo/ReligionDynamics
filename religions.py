@@ -19,7 +19,7 @@ def define_ivp_system(n, C):
         :param P: population change as a function of time
         :return: (np.ndarray) ode system
         '''
-        system = np.zeros(n)
+        system = np.zeros_like(n)
         size = system.size
         for i in range(size):
             system[i] = P[i] * (n[i] + sum([(C[i,j]-C[j,i])*P[j] for j in range(size)]))
