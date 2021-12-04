@@ -3,11 +3,12 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy.integrate import odeint, solve_ivp, solve_bvp
 
-def define_ivp_system( n, C, I ):
+def define_ivp_system( n, C):
     '''
     This returns a function defining the ODE system used in solve_ivp or odeint
     :param n: ( n, ) np.ndarray difference between birth rate and death rate of the ith relgion
-    :param C: ( n, n ) np.ndarray matrix containing conversion rate differences
+    :param C: ( n, n ) np.ndarray matrix containing conversion rate where C[i,j]
+                       represents the conversion rate from j to i (diagonal is 0)
     :param I: ( n, n ) np.ndarray matrix containing interactions between religions
     :return: callable the ode system
     '''
@@ -18,13 +19,10 @@ def define_ivp_system( n, C, I ):
         :param P: population change as a function of time
         :return: (np.ndarray) ode system
         '''
-        system = np.zeros_like( n )
+        system = np.zeros( n )
         size = system.size
         for i in range( size ):
-            if i != size -1:
-                system[i] = P[ i ]*( n[ i ] + sum( C[ i, :i ] * I[ i, :i ] ) + sum( C[ i, i + 1: ] * I[ i, i + 1: ] ) )
-            else:
-                system[i] = P[ i ] *( n[ i ] + sum( C[ i, :-1 ] *I[ i, :-1 ] ) )
+            system[i] = P[ i ]*( n[ i ] + sum( [(C[i,j]-C[j,i])*P[j] for j in range(size)] )
 
         return system
     return ode
@@ -43,7 +41,7 @@ def numerical_solve( P0, t_span, M, n, C, I, method='ivp' ):
     '''
     if method == 'ivp':
         ode = define_ivp_system( n, C, I )
-        t_eval = np.linsapce( t_span[ 0 ], t_span[ -1 ] )
+        t_eval = np.linspace( t_span[ 0 ], t_span[ -1 ] )
         sol =  solve_ivp(ode, t_span, P0, t_eval=t_eval)
     elif method == 'odeint':
         raise NotImplementedError ( 'odeint not yet implemented' )
