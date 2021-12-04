@@ -24,7 +24,9 @@ def define_ivp_system(n, C):
         # system[i] = P[i] * (n[i] + sum([(C[i,j]-C[j,i])*P[j] for j in range(size)]))
         # return system
         size = n.size
-        return np.array([P[i] * (n[i] + sum([(C[i, j] - C[j, i])*P[j] for j in range(size)])) for i in range(size)])
+        return np.array([P[i] * (n[i] + sum([(C[i, j] - C[j, i])*P[j]
+                                             for j in range(size)]))
+                                             for i in range(size)])
 
 
 
