@@ -23,7 +23,6 @@ def define_ivp_system(n, C):
         size = system.size
         for i in range(size):
             system[i] = P[i] * (n[i] + sum([(C[i,j]-C[j,i])*P[j] for j in range(size)]))
-
         return system
     return ode
 
@@ -69,6 +68,6 @@ def plot_sol(P0, t_span, M, n, C, method='ivp', labels=[]):
     ax.set_title('SIR Model of religions')
     plt.show()
 def BryceSection():
-    P0, t_span, M, n, C, method, labels = np.array([0.5, 0.5]), (0, 10),"ligma", np.array([1, 1]), np.array([[0, 1], [.5, 0]]), 'ivp', ['Christianity', 'Judaism']
+    P0, t_span, M, n, C, method, labels = np.array([.2, .5]), (0, 10),"ligma", np.array([1, 1]), np.array([[0, 1], [.5, 0]]), 'ivp', ['Christianity', 'Judaism']
     plot_sol(P0, t_span, M, n, C, method, labels)
 # BryceSection()
