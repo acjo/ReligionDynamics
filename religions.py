@@ -60,6 +60,7 @@ def plot_sol(P0, t_span, M, n, C, method='ivp', labels=[]):
     fig = plt.figure()
     fig.set_dpi(300)
     ax = fig.add_subplot(111)
+    print(sol.y)
     for s, lab in zip(sol.y, labels):
         ax.plot(sol.t, s, label=lab)
         ax.legend(loc='best')
