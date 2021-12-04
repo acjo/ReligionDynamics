@@ -79,6 +79,6 @@ def BryceSection():
     :return: callable the ode system
     '''
     P0, t_span, M, n, C, method, labels = [], [], [], [], [], [], []
-    ode = define_ivp_system(n, C)
+    ode = define_ivp_system(n,C)
     sol = odeint(ode, P0, t_span)
     return sol
