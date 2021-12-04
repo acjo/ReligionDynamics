@@ -13,7 +13,7 @@ def define_ivp_system(n, C):
     :return: callable the ode system
     '''
 
-    def ode( t, P ):
+    def ode(t, P):
         '''
         :param t: independent variable
         :param P: population change as a function of time
