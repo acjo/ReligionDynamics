@@ -69,3 +69,8 @@ def plot_sol(P0, t_span, M, n, C, method='ivp', labels=[]):
     ax.set_ylabel('Population')
     ax.set_title('SIR Model of religions')
     plt.show()
+def BryceSection():
+    P0, t_span, M, n, C, method, labels = [], [], [], [], [], [], []
+    ode = define_ivp_system(n,C)
+    sol = odeint(ode, P0, t_span)
+    return sol
