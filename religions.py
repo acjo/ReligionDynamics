@@ -27,6 +27,7 @@ def define_ivp_system(n, C):
         return system
     return ode
 
+
 def numerical_solve(P0, t_span, M, n, C, method='ivp'):
     '''
     Numerical solves the ivp using solve_ivp
@@ -52,6 +53,7 @@ def numerical_solve(P0, t_span, M, n, C, method='ivp'):
 
     return sol
 
+
 def plot_sol(P0, t_span, M, n, C, method='ivp', labels=[]):
     '''
     plots the solution
@@ -68,6 +70,9 @@ def plot_sol(P0, t_span, M, n, C, method='ivp', labels=[]):
     ax.set_ylabel('Population')
     ax.set_title('SIR Model of religions')
     plt.show()
+    return None
+
+
 def BryceSection():
     P0, t_span, M, n, C, method, labels = np.array([0.5, 0.5]), (0, 10),"ligma", np.array([1, 1]), np.array([[0, 1], [.5, 0]]), 'ivp', ['Christianity', 'Judaism']
     plot_sol(P0, t_span, M, n, C, method, labels)
