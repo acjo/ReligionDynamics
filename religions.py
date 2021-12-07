@@ -90,9 +90,8 @@ def plot_sol(t_span, M, n, C, method='ivp', P0=None, BC=None, labels=[]):
 
 
 def BryceSection():
-    P0, t_span, M, n, C, method, labels = np.array([10, 10, 10]), (0, 400),20000, np.array([.2, -0.02,-0.01]), np.array([[0, .001, .001], [.01, 0,.02],[.01,.02,0]]), 'ivp', ['No Conversion', 'A', 'B']
+    P0, t_span, M, n, C, method, labels = np.array([10, 10, 10]), (0, 400),20000, np.array([.2, -0.02,-0.01]), np.array([[0, .001, .001], [.01, 0,.01],[.01,.01,0]]), 'ivp', ['A', 'B', 'C']
     plot_sol(t_span, M, n, C, method, P0= P0, labels=labels)
-    #plot_sol([10,10], (0,10), 1, [0,0], np.array([[0,0.1],[0,0]]), method='ivp', labels=['A','B'])
 # BryceSection()
 
 # P[i] - normal people
