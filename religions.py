@@ -82,7 +82,7 @@ def BryceSection():
     P0, t_span, M, n, C, method, labels = np.array([10, 10, 10]), (0, 400),20000, np.array([.2, -0.02,-0.01]), np.array([[0, .001, .001], [.01, 0,.02],[.01,.02,0]]), 'ivp', ['No Conversion', 'A', 'B']
     plot_sol(P0, t_span, M, n, C, method, labels)
     #plot_sol([10,10], (0,10), 1, [0,0], np.array([[0,0.1],[0,0]]), method='ivp', labels=['A','B'])
-BryceSection()
+# BryceSection()
 
 # P[i] - normal people
 # P[ i ] - Caelan
