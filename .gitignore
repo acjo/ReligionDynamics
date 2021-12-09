@@ -35,17 +35,14 @@ __pycache__/
 *.out
 *.toc
 *.fdb_latexmk
-*.pdfsync
 *.synctex.gz
 *.nav
 *.snm
 *.vrb
 *.bcf
 *.fls
-*.pdf
 *.csv
 *.npy
-*.pdf
 *.txt
 *.npz
 *.npz.gz
